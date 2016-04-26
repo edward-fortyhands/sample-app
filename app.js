@@ -11,7 +11,10 @@ require('./models/Comments');
 require('./models/Users');
 require('./config/passport');
 
-mongoose.connect('mongodb://patrikll:amd4200+@ds013599.mlab.com:13599/posts');
+var username = process.env.MONGO_USERNAME;
+var password = process.env.MONGO_PW;
+
+mongoose.connect('mongodb://' + username+ ':'+ password+'@ds013599.mlab.com:13599/posts');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');

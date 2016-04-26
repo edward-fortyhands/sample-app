@@ -8,7 +8,7 @@ var Post = mongoose.model('Post');
 var Comment = mongoose.model('Comment');
 var User = mongoose.model('User');
 
-var auth = jwt({ secret: 'SECRET', userProperty: 'payload' });
+var auth = jwt({ secret: process.env.SECRET, userProperty: 'payload' });
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

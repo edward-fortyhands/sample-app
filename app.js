@@ -11,7 +11,7 @@ require('./models/Comments');
 require('./models/Users');
 require('./config/passport');
 
-var db = 'mongodb://' + process.env.MONGO_USERNAME+ ':'+ process.env.MONGO_PW+'@ds013599.mlab.com:13599/posts';
+var db = process.env.DB;
 
 mongoose.connect(db);
 

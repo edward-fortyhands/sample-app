@@ -121,11 +121,11 @@ app.factory('auth', ['$http', '$window', function($http, $window) {
 	var auth = {};
 
 	auth.saveToken = function (token) {
-		$window.localStorage.setItem('flapper-news-token', token);
+		$window.localStorage.setItem('likereddit-token', token);
 	};
 
 	auth.getToken = function () {
-		return $window.localStorage.getItem('flapper-news-token');
+		return $window.localStorage.getItem('likereddit-token');
 	};
 
 	auth.isLoggedIn = function () {

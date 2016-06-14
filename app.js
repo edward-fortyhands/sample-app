@@ -28,7 +28,23 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(stormpath.init(app));
+app.use(stormpath.init(app, {
+  web: {
+  register: {
+    form: {
+      fields: {
+        surname: {
+          enabled: false
+        }
+      }
+    }
+  }
+},
+  postLoginHandler: function (account, req, res, next) {
+    console.log('User:', account.email, 'just logged in!');
+    next();
+  }
+}));
 
 app.use('/', routes);
 

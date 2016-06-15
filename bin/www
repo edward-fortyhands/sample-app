@@ -16,7 +16,7 @@ var credentials = {key: privateKey, cert: certificate};
  * Get ports from environment and store in Express.
  */
 
-var httpPort = normalizePort(process.env.HTTP_PORT || '3000');
+var httpPort = normalizePort(process.env.PORT || '3000');
 var httpsPort = normalizePort(process.env.HTTPS_PORT || '8443');
 //app.set('port', port);
 

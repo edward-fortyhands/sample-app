@@ -42,6 +42,9 @@ o.getAll = function() {
   };
 
 o.create = function(post) {
+	$http.get('https://2gebipjp57.execute-api.eu-central-1.amazonaws.com/prod').success(function(){
+		console.log('Lambda sucessfully tested!');
+	});
   	return $http.post('/posts', post).success(function(data){
     o.posts.push(data);
   });

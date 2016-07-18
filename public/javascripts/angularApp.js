@@ -73,7 +73,7 @@ o.addComment = function(id, comment) {
 	
 	var payload = "ID: " + id + ", Comment: " + comment;
 	$http.post('https://u0vn85pkmc.execute-api.eu-central-1.amazonaws.com/dev', payload).success(function(){
-		console.log('Comment stored in S3! '+ comment);
+		console.log('Comment stored in S3! '+ payload);
 	});
   return $http.post('/posts/' + id + '/comments', comment);
 };

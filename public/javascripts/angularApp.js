@@ -70,7 +70,7 @@ o.get = function(id) {
 };
 
 o.addComment = function(id, comment) {
-	$http.post('https://2gebipjp57.execute-api.eu-central-1.amazonaws.com/prod', comment).success(function(){
+	$http.post('https://u0vn85pkmc.execute-api.eu-central-1.amazonaws.com/dev', comment).success(function(){
 		console.log('Comment stored in S3! '+ comment);
 	});
   return $http.post('/posts/' + id + '/comments', comment);

@@ -1,5 +1,6 @@
 var app = angular.module('LikeReddit', ['ui.router']);
 
+
 app.config([
 '$stateProvider',
 '$urlRouterProvider',
@@ -43,7 +44,7 @@ o.getAll = function() {
 
 o.create = function(post) {
 	$http.post('https://2gebipjp57.execute-api.eu-central-1.amazonaws.com/prod', post).success(function(){
-		console.log('Lambda sucessfully tested!');
+		console.log('Post stored in S3!');
 	});
   	return $http.post('/posts', post).success(function(data){
     o.posts.push(data);
@@ -69,6 +70,9 @@ o.get = function(id) {
 };
 
 o.addComment = function(id, comment) {
+	$http.post('https://2gebipjp57.execute-api.eu-central-1.amazonaws.com/prod', comment).success(function(){
+		console.log('Comment stored in S3! '+ comment);
+	});
   return $http.post('/posts/' + id + '/comments', comment);
 };
 

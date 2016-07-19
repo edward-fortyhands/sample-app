@@ -81,6 +81,7 @@ router.post('/posts/:post/comments', stormpath.loginRequired, function(req, res,
   var comment = new Comment(req.body);
   comment.post = req.post;
   comment.author = req.user.givenName;
+  console.log(comment.author);
   comment.save(function(err, comment){
     if(err){ 
     	return next(err); 

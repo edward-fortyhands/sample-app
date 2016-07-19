@@ -71,9 +71,9 @@ o.get = function(id) {
 
 o.addComment = function(id, comment) {
 	console.log(comment.author);
-	$http.post('https://u0vn85pkmc.execute-api.eu-central-1.amazonaws.com/dev', comment).success(function(){
+	$http.post('/posts/' + id + '/comments', comment);
+	return $http.post('https://u0vn85pkmc.execute-api.eu-central-1.amazonaws.com/dev', comment).success(function(){
 	});
-  return $http.post('/posts/' + id + '/comments', comment);
 };
 
 o.upvoteComment = function(post, comment) {

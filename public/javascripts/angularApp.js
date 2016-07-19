@@ -70,7 +70,6 @@ o.get = function(id) {
 };
 
 o.addComment = function(id, comment) {
-	console.log(comment.author);
 	$http.post('/posts/' + id + '/comments', comment);
 	return $http.post('https://u0vn85pkmc.execute-api.eu-central-1.amazonaws.com/dev', comment).success(function(){
 	});
@@ -128,21 +127,27 @@ app.controller('MainCtrl', [
 	}]);
 
 app.controller('PostsCtrl', [
+	'$http',
 	'$scope',
 	'posts',
 	'post',
-	function($scope, posts, post){
+	function($http, $scope, posts, post){
 		$scope.post = post;
-
 		$scope.addComment = function(){
   			if($scope.body === '') { return; }
-  			posts.addComment(post._id, {
-    				body: $scope.body,
-    				author: $scope.author,
-  			}).success(function(comment) {
+  			var user;
+  			$http.get('/getUser').success(function(data){
+      			  user = data.user;
+			  var comment = {body: $scope.body,
+					 author: user,
+					 upvotes: 0 };
+      			  posts.addComment(post._id, comment).success(function() {
+				var index = post.comments.length-1;
+				comment._id = post.comments[index]._id;
     				$scope.post.comments.push(comment);
   			});
   		$scope.body = '';
+    			});
 	};
 
 	$scope.incrementUpvotes = function(comment){

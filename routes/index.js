@@ -61,6 +61,11 @@ router.get('/posts/:post', stormpath.loginRequired, function(req, res, next) {
   });
 });
 
+router.get('/getUser', stormpath.loginRequired, function(req, res, next) {
+ console.log(req.user.givenName); 
+ res.json({user: req.user.givenName});
+});
+
 router.put('/posts/:post/upvote', stormpath.loginRequired, function(req, res, next) {
   req.post.upvote(function(err, post){
     if (err) { return next(err); }
@@ -78,10 +83,9 @@ router.put('/posts/:post/downvote', stormpath.loginRequired, function(req, res, 
 });
 
 router.post('/posts/:post/comments', stormpath.loginRequired, function(req, res, next) {
-  var comment = new Comment(req.body);
+   var comment = new Comment(req.body);
   comment.post = req.post;
   comment.author = req.user.givenName;
-  console.log(comment.author);
   comment.save(function(err, comment){
     if(err){ 
     	return next(err); 

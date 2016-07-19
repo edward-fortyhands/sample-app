@@ -85,12 +85,12 @@ router.post('/posts/:post/comments', stormpath.loginRequired, function(req, res,
     if(err){ 
     	return next(err); 
     }
-    req.post.comments.push(comment);
-    req.post.save(function(err, comment) {
+     req.post.save(function(err, comment) {
       if(err){ return next(err); }
 
       res.json(comment);
     });
+    req.post.comments.push(comment);
   });
 });
 

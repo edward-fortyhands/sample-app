@@ -70,10 +70,8 @@ o.get = function(id) {
 };
 
 o.addComment = function(id, comment) {
-	
-	var payload = "ID: " + id + ", Comment: " + comment;
-	$http.post('https://u0vn85pkmc.execute-api.eu-central-1.amazonaws.com/dev', payload).success(function(){
-		console.log('Comment stored in S3! '+ payload);
+	console.log(comment.author);
+	$http.post('https://u0vn85pkmc.execute-api.eu-central-1.amazonaws.com/dev', comment).success(function(){
 	});
   return $http.post('/posts/' + id + '/comments', comment);
 };
@@ -130,30 +128,30 @@ app.controller('MainCtrl', [
 	}]);
 
 app.controller('PostsCtrl', [
-'$scope',
-'posts',
-'post',
-function($scope, posts, post){
-	$scope.post = post
+	'$scope',
+	'posts',
+	'post',
+	function($scope, posts, post){
+		$scope.post = post;
 
-$scope.addComment = function(){
-  if($scope.body === '') { return; }
-  posts.addComment(post._id, {
-    body: $scope.body,
-    author: 'user',
-  }).success(function(comment) {
-    $scope.post.comments.push(comment);
-  });
-  $scope.body = '';
-};
+		$scope.addComment = function(){
+  			if($scope.body === '') { return; }
+  			posts.addComment(post._id, {
+    				body: $scope.body,
+    				author: $scope.author,
+  			}).success(function(comment) {
+    				$scope.post.comments.push(comment);
+  			});
+  		$scope.body = '';
+	};
 
-$scope.incrementUpvotes = function(comment){
-	posts.upvoteComment(post, comment);
-};
+	$scope.incrementUpvotes = function(comment){
+		posts.upvoteComment(post, comment);
+	};
 
-$scope.decrementUpvotes = function(comment){
-	posts.downvoteComment(post, comment);
-};
+	$scope.decrementUpvotes = function(comment){
+		posts.downvoteComment(post, comment);
+	};
 
 
 }]);

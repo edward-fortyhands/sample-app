@@ -140,7 +140,7 @@ app.controller('PostsCtrl', [
       			  user = data.user;
 			  var comment = {body: $scope.body,
 					 author: user,
-					 upvotes: 0 
+					 upvotes: 0, 
 					 post: post._id};
       			  posts.addComment(post._id, comment).success(function() {
 				var index = post.comments.length-1;

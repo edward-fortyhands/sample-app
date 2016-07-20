@@ -143,10 +143,13 @@ app.controller('PostsCtrl', [
 					 upvotes: 0, 
 					 post: post._id};
       			  posts.addComment(post._id, comment).success(function() {
-				var index = post.comments.length-1;
-				comment._id = post.comments[index]._id;
-    				$scope.post.comments.push(comment);
-  			});
+      			  	var index;
+					if (post.comments.length != 0) {
+						index = post.comments.length-1;
+						comment._id = post.comments[index]._id;	
+					}
+	    				$scope.post.comments.push(comment);
+    			 });
   		$scope.body = '';
     			});
 	};

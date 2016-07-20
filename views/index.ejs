@@ -17,7 +17,7 @@
   <nav class="navbar navbar-default" ng-controller="NavCtrl">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand">LikeReddit</a>
+        <a class="navbar-brand" href="#/home">LikeReddit</a>
       </div>
       <ul class="nav navbar-nav">
         <li><a>Hallo {{user}}</a></li> 
@@ -29,7 +29,7 @@
   </nav>
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-		<ui-view></ui-view>     
+    <ui-view></ui-view>     
     </div>
   </div>
 
@@ -56,8 +56,8 @@
           </span>
         </span>
         <span>
- 			    <a href="#/posts/{{post._id}}"><span class="glyphicon glyphicon-comment"></span></a>
-		    </span>
+          <a href="#/posts/{{post._id}}"><span class="glyphicon glyphicon-comment"></span></a>
+        </span>
       </div>
 
       <form ng-submit="addPost()"

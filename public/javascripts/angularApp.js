@@ -165,7 +165,14 @@ app.controller('PostsCtrl', [
 
 app.controller('NavCtrl', [
 '$scope',
+'$http',
 'auth',
-function($scope, auth){
+function($scope, $http, auth){
   $scope.logOut = auth.logOut;
+
+  $http.get('/getUser').success(function(data){
+	  $scope.user = data.user;
+  });
+
 }]);
+	

@@ -6,8 +6,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
   <script src="/javascripts/angularApp.js"></script>
-  <style> .glyphicon-arrow-up { cursor:pointer } </style>
-  <style> .glyphicon-arrow-down { cursor:pointer } </style>
+  <style> .glyphicon-arrow-up { cursor:pointer; color:#428bca; } </style>
+  <style> .glyphicon-arrow-down { cursor:pointer; color:#428bca; } </style>
+  <style> .glyphicon-trash { cursor:pointer; color:#428bca; }</style>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
@@ -20,7 +21,7 @@
         <a class="navbar-brand" href="#/home">LikeReddit</a>
       </div>
       <ul class="nav navbar-nav">
-        <li><a>Hallo {{user}}</a></li> 
+        <li><a>Hello {{user}}</a></li> 
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="" ng-click="logOut()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
@@ -56,7 +57,7 @@
           </span>
         </span>
         <span>
-          <a href="#/posts/{{post._id}}"><span class="glyphicon glyphicon-comment"></span></a>
+          <a href="#/posts/{{post._id}}"><span style="margin-left: 10px" class="glyphicon glyphicon-comment"></span></a>
         </span>
       </div>
 
@@ -92,14 +93,15 @@
   </div>
 
   <div ng-repeat="comment in post.comments | orderBy:'-upvotes'">
-    <span class="glyphicon glyphicon-arrow-up"
+    <span title="+1" class="glyphicon glyphicon-arrow-up"
           ng-click="incrementUpvotes(comment)"></span>
-    <span class="glyphicon glyphicon-arrow-down"
+    <span title="-1" class="glyphicon glyphicon-arrow-down"
       ng-click="decrementUpvotes(comment)"></span>
     {{comment.upvotes}} - by {{comment.author}}
     <span style="font-size:20px; margin-left:10px;">
       {{comment.body}}
     </span>
+    <span title="Delete comment" style="margin-left: 10px" class="glyphicon glyphicon-trash" ng-click="deleteComment(comment)"></span>
   </div>
 
   <form ng-submit="addComment()"

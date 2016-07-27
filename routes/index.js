@@ -62,7 +62,6 @@ router.get('/posts/:post', stormpath.loginRequired, function(req, res, next) {
 });
 
 router.get('/getUser', stormpath.loginRequired, function(req, res, next) {
- console.log(req.user.givenName); 
  res.json({user: req.user.givenName});
 });
 
@@ -88,7 +87,7 @@ router.post('/posts/:post/comments', stormpath.loginRequired, function(req, res,
   comment.author = req.user.givenName;
   comment.save(function(err, comment){
     if(err){ 
-    	return next(err); 
+      return next(err); 
     }
      req.post.save(function(err, comment) {
       if(err){ return next(err); }
@@ -115,5 +114,8 @@ router.put('/posts/:post/comments/:comment/downvote', stormpath.loginRequired, f
   });
 });
 
+router.delete('/posts/:post/comments/:comment', stormpath.loginRequired, function(req, res, next) {
+ Comment.find({ _id:req.post.comment._id }).remove().exec();
+});
 
 module.exports = router;

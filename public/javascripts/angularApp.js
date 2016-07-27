@@ -88,6 +88,19 @@ o.downvoteComment = function(post, comment) {
 	});
 };
 
+o.deleteComment = function(post, comment) {
+	/*var index;
+	for (var i = 0; i < o.posts.length; i++) {
+		if (o.posts[i]._id == post._id) {
+			index = o.posts[i].comments.indexOf(comment._id);
+			o.posts[i].comments.splice(index, 1);
+		}
+	}*/
+	return $http.delete('/posts/' + post._id + '/comments/' + comment._id , null).success (function() {
+	});
+};
+
+
 	return o;
 }]);
 
@@ -106,7 +119,6 @@ app.controller('MainCtrl', [
 	'$scope', 'posts', 
 	function($scope, posts) {
 		$scope.posts = posts.posts;
-
 		$scope.addPost = function(){
 		  if(!$scope.title || $scope.title === '') { return; }
 		  posts.create({
@@ -129,9 +141,10 @@ app.controller('MainCtrl', [
 app.controller('PostsCtrl', [
 	'$http',
 	'$scope',
+	'$window',
 	'posts',
 	'post',
-	function($http, $scope, posts, post){
+	function($http, $scope, $window, posts, post){
 		$scope.post = post;
 		$scope.addComment = function(){
   			if($scope.body === '') { return; }
@@ -149,6 +162,7 @@ app.controller('PostsCtrl', [
 						comment._id = post.comments[index]._id;	
 					}
 	    				$scope.post.comments.push(comment);
+	    				if ($scope.post.comments.length === 1) {$window.location.reload();};
     			 });
   		$scope.body = '';
     			});
@@ -160,6 +174,19 @@ app.controller('PostsCtrl', [
 
 	$scope.decrementUpvotes = function(comment){
 		posts.downvoteComment(post, comment);
+	};
+
+	$scope.deleteComment = function (comment){
+		var user;
+		$http.get('/getUser').success(function(data){
+			user = data.user;
+			if (user === comment.author) {
+				posts.deleteComment(post, comment);
+				$window.location.reload();
+			} else {
+				alert('Nur eigene Kommentar können gelöscht werden!');
+			}
+		});
 	};
 
 

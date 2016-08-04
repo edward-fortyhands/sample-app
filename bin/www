@@ -8,16 +8,16 @@ var fs = require('fs');
 var app = require('../app');
 var debug = require('debug')('LikeReddit:server');
 var http = require('http');
-var https = require('https');
-var privateKey  = fs.readFileSync('./bin/privatekey.key', 'utf8');
-var certificate = fs.readFileSync('./bin/certificate.crt', 'utf8');
-var credentials = {key: privateKey, cert: certificate};
+// var https = require('https');
+// var privateKey  = fs.readFileSync('./bin/privatekey.key', 'utf8');
+// var certificate = fs.readFileSync('./bin/certificate.crt', 'utf8');
+// var credentials = {key: privateKey, cert: certificate};
 /**
  * Get ports from environment and store in Express.
  */
 
 var httpPort = normalizePort(process.env.PORT || '80');
-var httpsPort = normalizePort(process.env.HTTPS_PORT || '443');
+// var httpsPort = normalizePort(process.env.HTTPS_PORT || '443');
 //app.set('port', port);
 
 /**
@@ -25,7 +25,7 @@ var httpsPort = normalizePort(process.env.HTTPS_PORT || '443');
  */
 
 var httpServer = http.createServer(app);
-var httpsServer = https.createServer(credentials, app)
+// var httpsServer = https.createServer(credentials, app)
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -35,9 +35,9 @@ httpServer.listen(httpPort);
 httpServer.on('error', onError);
 httpServer.on('listening', onListening);
 
-httpsServer.listen(httpsPort);
-httpsServer.on('error', onError);
-httpsServer.on('listening', onListening);
+// httpsServer.listen(httpsPort);
+// httpsServer.on('error', onError);
+// httpsServer.on('listening', onListening);
 
 /**
  * Normalize a port into a number, string, or false.

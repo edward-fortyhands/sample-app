@@ -101,7 +101,7 @@
     <span style="font-size:20px; margin-left:10px;">
       {{comment.body}}
     </span>
-    <span title="Delete comment" style="margin-left: 10px" class="glyphicon glyphicon-trash" ng-click="deleteComment(comment)"></span>
+    <span ng-show="comment.author == user" title="Delete comment" style="margin-left: 10px" class="glyphicon glyphicon-trash" ng-click="deleteComment(comment)"></span
   </div>
 
   <form ng-submit="addComment()"

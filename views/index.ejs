@@ -30,7 +30,7 @@
   </nav>
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-    <ui-view></ui-view>     
+		<ui-view></ui-view>     
     </div>
   </div>
 
@@ -57,8 +57,8 @@
           </span>
         </span>
         <span>
-          <a href="#/posts/{{post._id}}"><span style="margin-left: 10px" class="glyphicon glyphicon-comment"></span></a>
-        </span>
+ 			    <a href="#/posts/{{post._id}}"><span style="margin-left: 10px" class="glyphicon glyphicon-comment"></span></a>
+		    </span>
       </div>
 
       <form ng-submit="addPost()"
@@ -101,7 +101,7 @@
     <span style="font-size:20px; margin-left:10px;">
       {{comment.body}}
     </span>
-    <span ng-show="comment.author == user" title="Delete comment" style="margin-left: 10px" class="glyphicon glyphicon-trash" ng-click="deleteComment(comment)"></span
+    <span ng-show="comment.author == user" title="Delete comment" style="margin-left: 10px" class="glyphicon glyphicon-trash" ng-click="deleteComment(comment)"></span>
   </div>
 
   <form ng-submit="addComment()"
